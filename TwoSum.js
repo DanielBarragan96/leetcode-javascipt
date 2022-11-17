@@ -11,3 +11,5 @@ var twoSum = function (nums, target) {
   }
   return [val1, val2];
 };
+
+console.log(twoSum([1, 2, 3, 4], 5));
