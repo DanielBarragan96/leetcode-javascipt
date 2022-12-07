@@ -4,21 +4,24 @@
  */
 var threeSum = function (nums) {
   res = [];
-  nums = nums.sort();
+  nums = nums.sort((a, b) => a - b);
   for (i = 0; i < nums.length - 2; i++) {
     if (nums[i] > 0) break;
-    for (j = i + 1; j < nums.length - 1; j++) {
-      for (k = j + 1; k < nums.length; k++) {
-        if (i == j || i == k || j == k) continue;
-        if (nums[i] + nums[j] + nums[k] == 0) {
-          triplet = [nums[i], nums[j], nums[k]];
-          var isNewTripplet = true;
-          res.forEach((element) => {
-            isNewTripplet &=
-              JSON.stringify(element) !== JSON.stringify(triplet);
-          });
-          if (isNewTripplet) res.push(triplet);
-        }
+    if (i > 0 && nums[i] == nums[i - 1]) continue;
+    j = i + 1;
+    k = nums.length - 1;
+    while (j < k) {
+      sum = nums[i] + nums[j] + nums[k];
+      if (sum == 0) {
+        res.push([nums[i], nums[j], nums[k]]);
+        while (nums[j] == nums[j + 1]) j++;
+        while (nums[k] == nums[k - 1]) k--;
+        j++;
+        k--;
+      } else if (sum < 0) {
+        j++;
+      } else {
+        k--;
       }
     }
   }
