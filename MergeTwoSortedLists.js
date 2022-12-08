@@ -30,6 +30,22 @@ var mergeTwoLists = function (list1, list2) {
   return mergeHead.next;
 };
 
-list1 = [1, 2, 4];
-list2 = [1, 3, 4];
+class ListNode {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
+  }
+}
+
+list1 = new ListNode(1);
+list2 = new ListNode(2);
+auxList1 = list1;
+auxList2 = list2;
+for (offset = 1; offset < 3; offset++) {
+  auxList1.next = new ListNode(list1.val + offset);
+  auxList2.next = new ListNode(list2.val + offset);
+  auxList1 = auxList1.next;
+  auxList2 = auxList2.next;
+}
+
 console.log(mergeTwoLists(list1, list2));
