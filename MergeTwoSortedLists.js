@@ -4,21 +4,30 @@
  * @return {ListNode}
  */
 var mergeTwoLists = function (list1, list2) {
-  mergedList = new Array(list1.length + list2.length);
-  i = 0;
-  j = 0;
-  for (index = 0; index < mergedList.length; index++) {
-    if (i > list1.length) {
-      mergedList[index] = list2[j++];
-    } else if (j > list2.length) {
-      mergedList[index] = list1[i++];
-    } else if (list1[i] <= list2[j]) {
-      mergedList[index] = list1[i++];
+  if (list1 == null && list2 == null) return null;
+  var mergeHead = new ListNode();
+  mergeEnd = mergeHead;
+  while (list1 && list2) {
+    if (list1.val < list2.val) {
+      mergeEnd.next = new ListNode(list1.val);
+      list1 = list1.next;
     } else {
-      mergedList[index] = list2[j++];
+      mergeEnd.next = new ListNode(list2.val);
+      list2 = list2.next;
     }
+    mergeEnd = mergeEnd.next;
   }
-  return mergedList;
+  while (list1) {
+    mergeEnd.next = new ListNode(list1.val);
+    list1 = list1.next;
+    mergeEnd = mergeEnd.next;
+  }
+  while (list2) {
+    mergeEnd.next = new ListNode(list2.val);
+    list2 = list2.next;
+    mergeEnd = mergeEnd.next;
+  }
+  return mergeHead.next;
 };
 
 list1 = [1, 2, 4];
