@@ -21,14 +21,27 @@ intervals[i].length == 2
  * @return {number[][]}
  */
 var merge = function (intervals) {
-  return "";
+  intervals.sort((a, b) => a[0] - b[0]);
+  console.log(intervals);
+  // [[x,y],[z,a]]
+  for (let index = 1; index < intervals.length; index++) {
+    let x = intervals[index - 1][0];
+    let y = intervals[index - 1][1];
+    let z = intervals[index][0];
+    let a = intervals[index][1];
+    if (y >= z) {
+      let end = y > a ? y : a;
+      let newInterval = [x, end];
+      intervals.splice(index--, 1);
+      intervals[index] = newInterval;
+    }
+  }
+  return intervals;
 };
 
 console.log(
   merge([
-    [1, 3],
-    [2, 6],
-    [8, 10],
-    [15, 18],
+    [1, 4],
+    [2, 3],
   ])
 );
