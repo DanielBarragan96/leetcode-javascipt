@@ -26,16 +26,12 @@ Constraints:
  * @return {number}
  */
 var maxSubArray = function (nums) {
-  let maxSum = 0;
-  for (let i = 0; i < nums.length; i++) {
-    let subSum = nums[i];
-    if (subSum > maxSum) maxSum = subSum;
-    for (j = i + 1; j < nums.length; j++) {
-      subSum += nums[j];
-      if (subSum > maxSum) maxSum = subSum;
-    }
+  let maxSum = nums[0];
+  for (let i = 1; i < nums.length; i++) {
+    nums[i] = Math.max(nums[i], nums[i] + nums[i - 1]);
+    if (nums[i] > maxSum) maxSum = nums[i];
   }
   return maxSum;
 };
 
-console.log(maxSubArray);
+console.log(maxSubArray([-1, -2]));
