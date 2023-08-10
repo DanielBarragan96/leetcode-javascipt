@@ -18,3 +18,25 @@ Constraints:
 -10 <= nums[i] <= 10
 All the integers of nums are unique.
 */
+
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+function permute(nums) {
+  let res = [];
+  if (nums.length == 1) return [[nums[0]]];
+  for (let i = 0; i < nums.length; i++) {
+    let aux = nums.splice(0, 1)[0];
+    let perms = permute(nums);
+
+    for (let index = 0; index < perms.length; index++) {
+      perms[index].push(aux);
+      res.push(perms[index]);
+    }
+    nums.push(aux);
+  }
+  return res;
+}
+
+console.log(permute([1, 2, 3, 4]));
