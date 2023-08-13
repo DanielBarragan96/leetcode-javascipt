@@ -22,3 +22,21 @@ intervals is sorted by starti in ascending order.
 newInterval.length == 2
 0 <= start <= end <= 105
 */
+/**
+ * @param {number[][]} intervals
+ * @param {number[]} newInterval
+ * @return {number[][]}
+ */
+var insert = function (intervals, newInterval) {
+  return "";
+};
+
+console.log(
+  insert(
+    [
+      [1, 3],
+      [6, 9],
+    ],
+    [2, 5]
+  )
+);
