@@ -34,15 +34,47 @@ newInterval.length == 2
  * @return {number[][]}
  */
 var insert = function (intervals, newInterval) {
+  let searchForStart = true;
+  let minIntervalIndex = -1;
+  let minIntervalValue = -1;
+  let maxIntervalIndex = -1;
+  let maxIntervalValue = -1;
+  for (let index = 0; index < intervals.length; index++) {
+    if (searchForStart) {
+      if (newInterval[0] <= intervals[index][1]) {
+        searchForStart = false;
+        minIntervalIndex = index;
+        minIntervalValue =
+          newInterval[0] < intervals[index][0]
+            ? newInterval[0]
+            : intervals[index][0];
+      }
+    }
+
+    if (newInterval[1] < intervals[index][1]) {
+      break;
+    }
+    maxIntervalIndex = index;
+    maxIntervalValue =
+      newInterval[1] > intervals[index][1]
+        ? newInterval[1]
+        : intervals[index][1];
+  }
+  console.log(`${minIntervalIndex} - ${minIntervalValue}`);
+  console.log(`${maxIntervalIndex} - ${maxIntervalValue}`);
+
   return "";
 };
 
 console.log(
   insert(
     [
-      [1, 3],
-      [6, 9],
+      [1, 2],
+      [3, 5],
+      [6, 7],
+      [8, 10],
+      [12, 16],
     ],
-    [2, 5]
+    [4, 8]
   )
 );
