@@ -34,57 +34,21 @@ newInterval.length == 2
  * @return {number[][]}
  */
 var insert = function (intervals, newInterval) {
-  if (intervals.length < 1) {
-    return [newInterval];
-  }
-
-  let searchForStart = true;
-  let minIntervalIndex = -1;
-  let minIntervalValue = -1;
-  let maxIntervalIndex = -1;
-  let maxIntervalValue = -1;
-
-  let isInRange = (value, interval) => {
-    return value === 0 || (value >= interval[0] && value <= interval[1]);
-  };
-
+  let [newStart, newEnd] = newInterval;
+  let left = [];
+  let right = [];
   for (let index = 0; index < intervals.length; index++) {
-    if (searchForStart) {
-      if (isInRange(newInterval[0], intervals[index])) {
-        searchForStart = false;
-        minIntervalIndex = index;
-        minIntervalValue =
-          newInterval[0] < intervals[index][0]
-            ? newInterval[0]
-            : intervals[index][0];
-      }
+    let current = intervals[index];
+    if (current[1] < newStart) {
+      left.push(current);
+    } else if (current[0] > newEnd) {
+      right.push(current);
+    } else {
+      newStart = Math.min(newStart, current[0]);
+      newEnd = Math.max(newEnd, current[1]);
     }
-
-    if (newInterval[1] < intervals[index][0]) {
-      break;
-    }
-    maxIntervalIndex = index;
-    maxIntervalValue =
-      newInterval[1] > intervals[index][1]
-        ? newInterval[1]
-        : intervals[index][1];
   }
-
-  if (minIntervalIndex === -1) {
-    intervals.push(newInterval);
-    return intervals;
-  }
-
-  let intervalToInsert = [minIntervalValue, maxIntervalValue];
-  let intervalsToRemove = maxIntervalIndex - minIntervalIndex + 1;
-  intervals.splice(minIntervalIndex, intervalsToRemove, intervalToInsert);
-
-  // console.log(`Min ${minIntervalIndex}    ${minIntervalValue}`);
-  // console.log(`Max ${maxIntervalIndex}    ${maxIntervalValue}`);
-  // console.log(`Remove ${intervalsToRemove}`);
-  // console.log(`Interval2Ins ${intervalToInsert}`);
-
-  return intervals;
+  return [...left, [newStart, newEnd], ...right];
 };
 
 console.log(insert([[1, 5]], [6, 8]));
