@@ -34,14 +34,23 @@ newInterval.length == 2
  * @return {number[][]}
  */
 var insert = function (intervals, newInterval) {
+  if (intervals.length < 1) {
+    return [newInterval];
+  }
+
   let searchForStart = true;
   let minIntervalIndex = -1;
   let minIntervalValue = -1;
   let maxIntervalIndex = -1;
   let maxIntervalValue = -1;
+
+  let isInRange = (value, interval) => {
+    return value === 0 || (value >= interval[0] && value <= interval[1]);
+  };
+
   for (let index = 0; index < intervals.length; index++) {
     if (searchForStart) {
-      if (newInterval[0] <= intervals[index][1]) {
+      if (isInRange(newInterval[0], intervals[index])) {
         searchForStart = false;
         minIntervalIndex = index;
         minIntervalValue =
@@ -51,7 +60,7 @@ var insert = function (intervals, newInterval) {
       }
     }
 
-    if (newInterval[1] < intervals[index][1]) {
+    if (newInterval[1] < intervals[index][0]) {
       break;
     }
     maxIntervalIndex = index;
@@ -60,21 +69,22 @@ var insert = function (intervals, newInterval) {
         ? newInterval[1]
         : intervals[index][1];
   }
-  console.log(`${minIntervalIndex} - ${minIntervalValue}`);
-  console.log(`${maxIntervalIndex} - ${maxIntervalValue}`);
 
-  return "";
+  if (minIntervalIndex === -1) {
+    intervals.push(newInterval);
+    return intervals;
+  }
+
+  let intervalToInsert = [minIntervalValue, maxIntervalValue];
+  let intervalsToRemove = maxIntervalIndex - minIntervalIndex + 1;
+  intervals.splice(minIntervalIndex, intervalsToRemove, intervalToInsert);
+
+  // console.log(`Min ${minIntervalIndex}    ${minIntervalValue}`);
+  // console.log(`Max ${maxIntervalIndex}    ${maxIntervalValue}`);
+  // console.log(`Remove ${intervalsToRemove}`);
+  // console.log(`Interval2Ins ${intervalToInsert}`);
+
+  return intervals;
 };
 
-console.log(
-  insert(
-    [
-      [1, 2],
-      [3, 5],
-      [6, 7],
-      [8, 10],
-      [12, 16],
-    ],
-    [4, 8]
-  )
-);
+console.log(insert([[1, 5]], [6, 8]));
