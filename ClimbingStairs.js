@@ -25,6 +25,12 @@ Constraints:
  * @param {number} n
  * @return {number}
  */
-var climbStairs = function (n) {};
+var climbStairs = function (n) {
+  if (n <= 0) return 0;
+  if (n === 1 || n === 2) {
+    return n;
+  }
+  return climbStairs(n - 1) + climbStairs(n - 2);
+};
 
-console.log(climbStairs(3));
+console.log(climbStairs(4));
