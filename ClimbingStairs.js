@@ -25,12 +25,15 @@ Constraints:
  * @param {number} n
  * @return {number}
  */
+let mem = {};
 var climbStairs = function (n) {
   if (n <= 0) return 0;
   if (n === 1 || n === 2) {
     return n;
   }
-  return climbStairs(n - 1) + climbStairs(n - 2);
+  if (mem[n] !== undefined) return mem[n];
+  mem[n] = climbStairs(n - 1) + climbStairs(n - 2);
+  return mem[n];
 };
 
-console.log(climbStairs(4));
+console.log(climbStairs(45));
