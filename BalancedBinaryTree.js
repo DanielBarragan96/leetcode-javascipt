@@ -18,3 +18,8 @@ Constraints:
 The number of nodes in the tree is in the range [0, 5000].
 -104 <= Node.val <= 104
 */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isBalanced = function (root) {};
