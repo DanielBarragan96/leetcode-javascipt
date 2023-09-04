@@ -26,7 +26,18 @@ s consists only of printable ASCII characters.
  * @param {string} s
  * @return {boolean}
  */
-var isPalindrome = function (s) {};
+var isPalindrome = function (s) {
+  let lowercase = s.toLowerCase();
+  lowercase = lowercase.replace(/[^a-z0-9]/gi, "");
+  for (let offset = 0; offset < lowercase.length / 2; offset++) {
+    if (
+      lowercase.charAt(offset) !==
+      lowercase.charAt(lowercase.length - offset - 1)
+    )
+      return false;
+  }
+  return true;
+};
 
 let s = "A man, a plan, a canal: Panama";
 console.log(isPalindrome(s));
