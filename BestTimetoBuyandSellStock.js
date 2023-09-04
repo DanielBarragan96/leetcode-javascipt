@@ -22,6 +22,20 @@ Constraints:
  * @param {number[]} prices
  * @return {number}
  */
-var maxProfit = function (prices) {};
+var maxProfit = function (prices) {
+  let currMax = 0;
+  let left = 0;
+  let right = 1;
+  while (right < prices.length) {
+    if (prices[left] < prices[right]) {
+      let curr = prices[right] - prices[left];
+      currMax = Math.max(curr, currMax);
+    } else {
+      left = right;
+    }
+    right++;
+  }
+  return currMax;
+};
 
 console.log(maxProfit([7, 1, 5, 3, 6, 4]));
