@@ -34,7 +34,18 @@ The number of nodes in the tree is in the range [1, 104].
  * @return {boolean}
  */
 var isValidBST = function (root) {
-  return "";
+  let size = root.length;
+  for (let i = 0; i < size; i++) {
+    let leftIndex = 2 * i + 1;
+    let rightIndex = 2 * i + 2;
+    let left = root[leftIndex];
+    let right = root[rightIndex];
+    let curr = root[i];
+
+    if (leftIndex < size && left !== null && left > curr) return false;
+    if (rightIndex < size && right !== null && right < curr) return false;
+  }
+  return true;
 };
 
-console.log(isValidBST([2, 1, 3]));
+console.log(isValidBST([5, 1, 4, null, null, 3, 6]));
