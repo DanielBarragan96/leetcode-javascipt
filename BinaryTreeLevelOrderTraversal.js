@@ -30,3 +30,30 @@ The number of nodes in the tree is in the range [0, 2000].
  * @return {number[][]}
  */
 var levelOrder = function (root) {};
+
+let node5 = {
+  val: 7,
+  left: null,
+  right: null,
+};
+let node4 = {
+  val: 15,
+  left: null,
+  right: null,
+};
+let node3 = {
+  val: 20,
+  left: node4,
+  right: node5,
+};
+let node2 = {
+  val: 9,
+  left: null,
+  right: null,
+};
+let node1 = {
+  val: 3,
+  left: node2,
+  right: node3,
+};
+console.log(levelOrder(node1));
