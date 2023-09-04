@@ -29,7 +29,18 @@ The number of nodes in the tree is in the range [0, 2000].
  * @param {TreeNode} root
  * @return {number[][]}
  */
-var levelOrder = function (root) {};
+var levelOrder = function (root) {
+  return storeNode(root, 0, []);
+};
+
+var storeNode = function (node, level, res) {
+  if (node == null) return res;
+  if (res.length <= level) res.push([]);
+  res[level].push(node.val);
+  storeNode(node.left, level + 1, res);
+  storeNode(node.right, level + 1, res);
+  return res;
+};
 
 let node5 = {
   val: 7,
