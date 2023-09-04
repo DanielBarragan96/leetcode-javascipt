@@ -35,23 +35,30 @@ pos is -1 or a valid index in the linked-list.
  * @param {ListNode} head
  * @return {boolean}
  */
-var hasCycle = function (head) {};
-
-let node1 = {
-  val: 3,
-  next: node2,
+var hasCycle = function (head) {
+  let fast = head;
+  while (fast && fast.next) {
+    head = head.next;
+    fast = fast.next.next;
+    if (head === fast) return true;
+  }
+  return false;
 };
-let node2 = {
-  val: 2,
-  next: node3,
+
+let node4 = {
+  val: 4,
 };
 let node3 = {
   val: 0,
   next: node4,
 };
-let node4 = {
-  val: 4,
+let node2 = {
+  val: 2,
+  next: node3,
+};
+let node1 = {
+  val: 3,
   next: node2,
 };
-
+node4.next = node2;
 console.log(hasCycle(node1));
