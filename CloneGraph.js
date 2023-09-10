@@ -46,9 +46,48 @@ The Graph is connected and all nodes can be visited starting from the given node
  *    this.neighbors = neighbors === undefined ? [] : neighbors;
  * };
  */
+function Node(val, neighbors) {
+  this.val = val === undefined ? 0 : val;
+  this.neighbors = neighbors === undefined ? [] : neighbors;
+}
 
 /**
  * @param {Node} node
  * @return {Node}
  */
-var cloneGraph = function (node) {};
+var cloneGraph = function (node) {
+  let visited = {};
+  return cloneAux(node, visited);
+};
+var cloneAux = function (node, visited) {
+  if (node === null) {
+    return null;
+  }
+  if (visited[node.val]) {
+    return visited[node.val];
+  }
+  let newNode = new Node(node.val);
+  visited[node.val] = newNode;
+  for (let i = 0; i < node.neighbors.length; i++) {
+    let neighbor = visited[node.neighbors[i].val];
+    if (!neighbor) {
+      neighbor = cloneAux(node.neighbors[i], visited);
+    }
+    newNode.neighbors.push(neighbor);
+  }
+  return newNode;
+};
+
+let node1 = new Node(1);
+let node2 = new Node(2);
+let node3 = new Node(3);
+let node4 = new Node(4);
+
+node1.neighbors = [node2, node4];
+node2.neighbors = [node1, node3];
+node3.neighbors = [node2, node4];
+node4.neighbors = [node1, node3];
+
+let copy1 = cloneGraph(node1);
+console.log(copy1);
+console.log(copy1 === node1);
