@@ -38,3 +38,17 @@ Node.val is unique for each node.
 There are no repeated edges and no self-loops in the graph.
 The Graph is connected and all nodes can be visited starting from the given node.
 */
+
+/**
+ * // Definition for a Node.
+ * function Node(val, neighbors) {
+ *    this.val = val === undefined ? 0 : val;
+ *    this.neighbors = neighbors === undefined ? [] : neighbors;
+ * };
+ */
+
+/**
+ * @param {Node} node
+ * @return {Node}
+ */
+var cloneGraph = function (node) {};
