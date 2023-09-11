@@ -25,3 +25,5 @@ groupSizes.length == n
 */
 
 var groupThePeople = function (groupSizes) {};
+
+console.log(groupThePeople([3, 3, 3, 3, 3, 1, 3]));
