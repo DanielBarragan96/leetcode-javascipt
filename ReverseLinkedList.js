@@ -35,18 +35,14 @@ function ListNode(val, next) {
  * @return {ListNode}
  */
 var reverseList = function (head) {
-  if (head === null) {
-    return head;
-  }
   let last = null;
-  while (head && head.next) {
+  while (head != null) {
     let next = head.next;
     head.next = last;
     last = head;
     head = next;
   }
-  head.next = last;
-  return head;
+  return last;
 };
 
 let node5 = new ListNode(5);
