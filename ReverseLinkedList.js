@@ -45,10 +45,25 @@ var reverseList = function (head) {
   return last;
 };
 
+var reverseListRecursive = function (head, last) {
+  if (head === null) return null;
+  if (last === undefined) {
+    last = null;
+  }
+  if (head.next !== null) {
+    let nextNode = reverseListRecursive(head.next, head);
+    head.next = last;
+    return nextNode;
+  } else {
+    head.next = last;
+    return head;
+  }
+};
+
 let node5 = new ListNode(5);
 let node4 = new ListNode(4, node5);
 let node3 = new ListNode(3, node4);
 let node2 = new ListNode(2, node3);
 let node1 = new ListNode(1, node2);
 
-console.log(reverseList(node1));
+console.log(reverseListRecursive(node1));
