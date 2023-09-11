@@ -45,19 +45,12 @@ var reverseList = function (head) {
   return last;
 };
 
-var reverseListRecursive = function (head, last) {
-  if (head === null) return null;
-  if (last === undefined) {
-    last = null;
-  }
-  if (head.next !== null) {
-    let nextNode = reverseListRecursive(head.next, head);
-    head.next = last;
-    return nextNode;
-  } else {
-    head.next = last;
-    return head;
-  }
+var reverseListRecursive = function (head) {
+  if (head === null || head.next === null) return head;
+  let res = reverseListRecursive(head.next);
+  head.next.next = head;
+  head.next = null;
+  return res;
 };
 
 let node5 = new ListNode(5);
