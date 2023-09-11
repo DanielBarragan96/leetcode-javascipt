@@ -30,3 +30,58 @@ Constraints:
 Methods pop, top and getMin operations will always be called on non-empty stacks.
 At most 3 * 104 calls will be made to push, pop, top, and getMin.
 */
+
+var MinStack = function () {
+  this.stack = [];
+};
+
+/**
+ * @param {number} val
+ * @return {void}
+ */
+MinStack.prototype.push = function (val) {
+  let min = val;
+  if (this.stack.length > 0) {
+    min = Math.min(val, this.stack[this.stack.length - 1].min);
+  }
+  this.stack.push({ val: val, min: min });
+};
+
+/**
+ * @return {void}
+ */
+MinStack.prototype.pop = function () {
+  if (this.stack.length > 0) {
+    return this.stack.pop();
+  }
+  return null;
+};
+
+/**
+ * @return {number}
+ */
+MinStack.prototype.top = function () {
+  if (this.stack.length > 0) {
+    return this.stack[this.stack.length - 1].val;
+  }
+  return null;
+};
+
+/**
+ * @return {number}
+ */
+MinStack.prototype.getMin = function () {
+  if (this.stack.length > 0) {
+    return this.stack[this.stack.length - 1].min;
+  }
+  return null;
+};
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * var obj = new MinStack()
+ * obj.push(val)
+ * obj.pop()
+ * var param_3 = obj.top()
+ * var param_4 = obj.getMin()
+ */
