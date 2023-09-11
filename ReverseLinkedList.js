@@ -25,16 +25,34 @@ The number of nodes in the list is the range [0, 5000].
  *     this.next = (next===undefined ? null : next)
  * }
  */
+
+function ListNode(val, next) {
+  this.val = val === undefined ? 0 : val;
+  this.next = next === undefined ? null : next;
+}
 /**
  * @param {ListNode} head
  * @return {ListNode}
  */
-var reverseList = function (head) {};
+var reverseList = function (head) {
+  if (head === null) {
+    return head;
+  }
+  let last = null;
+  while (head && head.next) {
+    let next = head.next;
+    head.next = last;
+    last = head;
+    head = next;
+  }
+  head.next = last;
+  return head;
+};
 
-let node5 = ListNode(5);
-let node4 = ListNode(4, node5);
-let node3 = ListNode(3, node4);
-let node2 = ListNode(2, node3);
-let node1 = ListNode(1, node2);
+let node5 = new ListNode(5);
+let node4 = new ListNode(4, node5);
+let node3 = new ListNode(3, node4);
+let node2 = new ListNode(2, node3);
+let node1 = new ListNode(1, node2);
 
 console.log(reverseList(node1));
