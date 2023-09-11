@@ -24,6 +24,24 @@ groupSizes.length == n
 1 <= groupSizes[i] <= n
 */
 
-var groupThePeople = function (groupSizes) {};
+var groupThePeople = function (groupSizes) {
+  let res = [];
+  let groups = {};
+  for (let i = 0; i < groupSizes.length; i++) {
+    let size = groupSizes[i];
+    if (size === 1) {
+      res.push([i]);
+    } else if (groups[size]) {
+      groups[size].push(i);
+      if (groups[size].length === size) {
+        res.push([...groups[size]]);
+        delete groups[size];
+      }
+    } else {
+      groups[size] = [i];
+    }
+  }
+  return res;
+};
 
 console.log(groupThePeople([3, 3, 3, 3, 3, 1, 3]));
