@@ -31,7 +31,37 @@ grid[i][j] is '0' or '1'.
  * @param {character[][]} grid
  * @return {number}
  */
-var numIslands = function (grid) {};
+var numIslands = function (grid) {
+  let count = 0;
+
+  function checkIsland(i, j) {
+    if (
+      i < 0 ||
+      i >= grid.length ||
+      j < 0 ||
+      j >= grid[0].length ||
+      grid[i][j] == "0"
+    )
+      return;
+
+    grid[i][j] = "0";
+
+    checkIsland(i - 1, j);
+    checkIsland(i, j - 1);
+    checkIsland(i + 1, j);
+    checkIsland(i, j + 1);
+  }
+
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[0].length; j++) {
+      if (grid[i][j] === "1") {
+        count++;
+        checkIsland(i, j);
+      }
+    }
+  }
+  return count;
+};
 
 let grid = [
   ["1", "1", "0", "0", "0"],
