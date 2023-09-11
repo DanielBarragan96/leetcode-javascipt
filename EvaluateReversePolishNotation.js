@@ -41,4 +41,50 @@ tokens[i] is either an operator: "+", "-", "*", or "/", or an integer in the ran
  * @param {string[]} tokens
  * @return {number}
  */
-var evalRPN = function (tokens) {};
+var evalRPN = function (tokens) {
+  let stack = [];
+  for (let i = 0; i < tokens.length; i++) {
+    let curr = tokens[i];
+    // console.log(`current: ${curr}`);
+    // console.log(stack);
+    if (isNaN(curr)) {
+      let num2 = stack.pop();
+      let num1 = stack.pop();
+      switch (curr) {
+        case "+":
+          stack.push(num1 + num2);
+          break;
+        case "-":
+          stack.push(num1 - num2);
+          break;
+        case "*":
+          stack.push(num1 * num2);
+          break;
+        case "/":
+          stack.push(Math.trunc(num1 / num2));
+          break;
+      }
+    } else {
+      let currNum = parseInt(curr);
+      stack.push(currNum);
+    }
+  }
+  return stack.pop();
+};
+
+let input = [
+  "10",
+  "6",
+  "9",
+  "3",
+  "+",
+  "-11",
+  "*",
+  "/",
+  "*",
+  "17",
+  "+",
+  "5",
+  "+",
+];
+console.log(evalRPN(input));
