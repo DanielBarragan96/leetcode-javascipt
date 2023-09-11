@@ -30,3 +30,11 @@ The number of nodes in the list is the range [0, 5000].
  * @return {ListNode}
  */
 var reverseList = function (head) {};
+
+let node5 = ListNode(5);
+let node4 = ListNode(4, node5);
+let node3 = ListNode(3, node4);
+let node2 = ListNode(2, node3);
+let node1 = ListNode(1, node2);
+
+console.log(reverseList(node1));
