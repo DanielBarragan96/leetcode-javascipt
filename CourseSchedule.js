@@ -29,16 +29,43 @@ All the pairs prerequisites[i] are unique.
  * @return {boolean}
  */
 var canFinish = function (numCourses, prerequisites) {
-  let rules = {};
-  for (let i = 0; i < prerequisites.length; i++) {
-    if (rules[prerequisites[i][1]] == prerequisites[i][0]) return false;
-    rules[prerequisites[i][0]] = prerequisites[i][1];
+  //Topological Sort Algorithm
+  let N = numCourses;
+  let V = new Array(N).fill(0);
+  let graph = Array(numCourses)
+    .fill(0)
+    .map(() => []);
+
+  for (let [course, prereq] of prerequisites) {
+    graph[prereq].push(course);
+  }
+  //   console.log(JSON.stringify(graph));
+
+  function dfs(at, graph, V) {
+    // console.log(JSON.stringify(V));
+    // console.log(at);
+    V[at] = 2;
+    for (let node of graph[at]) {
+      if (V[node] === 0) {
+        if (dfs(node, graph, V)) return true;
+      } else if (V[node] === 2) {
+        return true;
+      }
+    }
+    V[at] = 1;
+    return false;
+  }
+  for (let i = 0; i < N; i++) {
+    if (!V[i]) {
+      if (dfs(i, graph, V)) return false;
+    }
   }
   return true;
 };
 
 let input = [
   [1, 0],
-  [0, 1],
+  [2, 1],
+  [0, 2],
 ];
-console.log(canFinish(2, input));
+console.log(canFinish(3, input));
