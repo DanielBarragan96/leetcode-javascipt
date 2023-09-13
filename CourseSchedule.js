@@ -28,4 +28,17 @@ All the pairs prerequisites[i] are unique.
  * @param {number[][]} prerequisites
  * @return {boolean}
  */
-var canFinish = function (numCourses, prerequisites) {};
+var canFinish = function (numCourses, prerequisites) {
+  let rules = {};
+  for (let i = 0; i < prerequisites.length; i++) {
+    if (rules[prerequisites[i][1]] == prerequisites[i][0]) return false;
+    rules[prerequisites[i][0]] = prerequisites[i][1];
+  }
+  return true;
+};
+
+let input = [
+  [1, 0],
+  [0, 1],
+];
+console.log(canFinish(2, input));
