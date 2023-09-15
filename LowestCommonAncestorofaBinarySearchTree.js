@@ -32,6 +32,10 @@ p and q will exist in the BST.
  *     this.left = this.right = null;
  * }
  */
+function TreeNode(val) {
+  this.val = val;
+  this.left = this.right = null;
+}
 
 /**
  * @param {TreeNode} root
@@ -39,4 +43,35 @@ p and q will exist in the BST.
  * @param {TreeNode} q
  * @return {TreeNode}
  */
-var lowestCommonAncestor = function (root, p, q) {};
+var lowestCommonAncestor = function (root, p, q) {
+  if (!root || (root.val >= p.val && root.val <= q.val)) {
+    return root;
+  } else if (root.val > p.val && root.val > q.val) {
+    return lowestCommonAncestor(root.left, p, q);
+  } else if (root.val < p.val && root.val < q.val) {
+    return lowestCommonAncestor(root.right, p, q);
+  }
+  return root;
+};
+
+let node1 = new TreeNode(6);
+let node2 = new TreeNode(2);
+let node3 = new TreeNode(8);
+let node4 = new TreeNode(0);
+let node5 = new TreeNode(4);
+let node6 = new TreeNode(7);
+let node7 = new TreeNode(9);
+let node8 = new TreeNode(3);
+let node9 = new TreeNode(5);
+
+node1.left = node2;
+node1.right = node3;
+node2.left = node4;
+node2.right = node5;
+node3.left = node6;
+node3.right = node7;
+node5.left = node8;
+node5.right = node9;
+
+console.log(node1);
+console.log(lowestCommonAncestor(node1, 2, 8).val);
