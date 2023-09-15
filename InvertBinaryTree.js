@@ -25,8 +25,37 @@ The number of nodes in the tree is in the range [0, 100].
  *     this.right = (right===undefined ? null : right)
  * }
  */
+function TreeNode(val, left, right) {
+  this.val = val === undefined ? 0 : val;
+  this.left = left === undefined ? null : left;
+  this.right = right === undefined ? null : right;
+}
 /**
  * @param {TreeNode} root
  * @return {TreeNode}
  */
-var invertTree = function (root) {};
+var invertTree = function (root) {
+  if (!root || (!root.left && !root.right)) {
+    return root;
+  }
+  console.log(`Parent ${root.val}  ${JSON.stringify(root)}`);
+  if (root.left) {
+    invertTree(root.left);
+  }
+  if (root.right) {
+    invertTree(root.right);
+  }
+  let temp = root.left;
+  root.left = root.right;
+  root.right = temp;
+
+  return root;
+};
+
+let node2 = new TreeNode(2);
+let node1 = new TreeNode(1);
+let node3 = new TreeNode(3);
+node2.left = node1;
+node2.right = node3;
+
+console.log(invertTree(node2));
