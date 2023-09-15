@@ -33,28 +33,38 @@ All the calls to pop and peek are valid.
 Follow-up: Can you implement the queue such that each operation is amortized O(1) time complexity? In other words, performing n operations will take overall O(n) time even if one of those operations may take longer.
 */
 
-var MyQueue = function () {};
+var MyQueue = function () {
+  this.fifo = [];
+};
 
 /**
  * @param {number} x
  * @return {void}
  */
-MyQueue.prototype.push = function (x) {};
+MyQueue.prototype.push = function (x) {
+  this.fifo.push(x);
+};
 
 /**
  * @return {number}
  */
-MyQueue.prototype.pop = function () {};
+MyQueue.prototype.pop = function () {
+  return this.fifo.splice(0, 1);
+};
 
 /**
  * @return {number}
  */
-MyQueue.prototype.peek = function () {};
+MyQueue.prototype.peek = function () {
+  return this.fifo[0];
+};
 
 /**
  * @return {boolean}
  */
-MyQueue.prototype.empty = function () {};
+MyQueue.prototype.empty = function () {
+  return this.fifo < 1;
+};
 
 /**
  * Your MyQueue object will be instantiated and called as such:
