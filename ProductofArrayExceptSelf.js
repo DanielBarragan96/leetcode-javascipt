@@ -22,4 +22,22 @@ Follow up: Can you solve the problem in O(1) extra space complexity? (The output
  * @param {number[]} nums
  * @return {number[]}
  */
-var productExceptSelf = function (nums) {};
+var productExceptSelf = function (nums) {
+  let res = new Array(nums.length).fill(1);
+
+  let productBefore = 1;
+  for (let i = 0; i < nums.length; i++) {
+    res[i] *= productBefore;
+    productBefore *= nums[i];
+  }
+
+  let productAfter = 1;
+  for (let i = nums.length - 1; i >= 0; i--) {
+    res[i] *= productAfter;
+    productAfter *= nums[i];
+  }
+
+  return res;
+};
+
+console.log(productExceptSelf([1, 2, 3, 4]));
