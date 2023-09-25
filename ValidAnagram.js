@@ -21,4 +21,20 @@ Follow up: What if the inputs contain Unicode characters? How would you adapt yo
  * @param {string} t
  * @return {boolean}
  */
-var isAnagram = function (s, t) {};
+var isAnagram = function (s, t) {
+  if (s.length !== t.length) return false;
+  let s_map = {};
+  let t_map = {};
+
+  for (let i = 0; i < s.length; i++) {
+    s_map[s.charAt(i)] = (s_map[s.charAt(i)] || 0) + 1;
+    t_map[t.charAt(i)] = (t_map[t.charAt(i)] || 0) + 1;
+  }
+  for (let i = 0; i < s.length; i++) {
+    let current = s.charAt(i);
+    if (s_map[current] !== t_map[current]) return false;
+  }
+  return true;
+};
+
+console.log(isAnagram("anagram", "nagaram"));
