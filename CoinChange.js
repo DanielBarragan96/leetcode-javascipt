@@ -26,4 +26,21 @@ Constraints:
  * @param {number} amount
  * @return {number}
  */
-var coinChange = function (coins, amount) {};
+var coinChange = function (coins, amount) {
+  if (amount === 0) return 0;
+  coins.sort((a, b) => a - b);
+  let option = new Array(amount + 1).fill(Infinity);
+  option[0] = 0;
+  for (let num = 1; num <= amount; num++) {
+    for (let coin of coins) {
+      if (num - coin >= 0) {
+        option[num] = Math.min(option[num], option[num - coin] + 1);
+      } else {
+        break;
+      }
+    }
+  }
+  return option[amount] === Infinity ? -1 : option[amount];
+};
+
+console.log(coinChange([1, 2, 5], 11));
