@@ -20,4 +20,27 @@ s consists of lowercase and/or uppercase English letters only.
  * @param {string} s
  * @return {number}
  */
-var longestPalindrome = function (s) {};
+var longestPalindrome = function (s) {
+  let dictionary = {};
+  for (let word of s) {
+    if (!dictionary[word]) {
+      dictionary[word] = 0;
+    }
+    dictionary[word]++;
+  }
+  let total = 0;
+  let isOdd = false;
+  for (let word in dictionary) {
+    while (dictionary[word] > 1) {
+      total += 2;
+      dictionary[word] -= 2;
+    }
+    if (!isOdd && dictionary[word] == 1) {
+      total++;
+      isOdd = true;
+    }
+  }
+  return total;
+};
+
+console.log(longestPalindrome("abccccdd"));
