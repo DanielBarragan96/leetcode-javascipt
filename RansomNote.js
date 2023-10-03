@@ -23,4 +23,20 @@ ransomNote and magazine consist of lowercase English letters.
  * @param {string} magazine
  * @return {boolean}
  */
-var canConstruct = function (ransomNote, magazine) {};
+var canConstruct = function (ransomNote, magazine) {
+  let dictionary = {};
+  for (let word of magazine) {
+    if (!dictionary[word]) {
+      dictionary[word] = 0;
+    }
+    dictionary[word]++;
+  }
+  for (let word of ransomNote) {
+    if (!dictionary[word] || dictionary[word]-- <= 0) {
+      return false;
+    }
+  }
+  return true;
+};
+
+console.log(canConstruct("aa", "aab"));
