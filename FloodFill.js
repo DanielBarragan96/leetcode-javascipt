@@ -32,3 +32,14 @@ n == image[i].length
  * @return {number[][]}
  */
 var floodFill = function (image, sr, sc, color) {};
+
+let image = [
+  [1, 1, 1],
+  [1, 1, 0],
+  [1, 0, 1],
+];
+let sr = 1;
+let sc = 1;
+let color = 2;
+
+console.log(floodFill(image, sr, sc, color));
