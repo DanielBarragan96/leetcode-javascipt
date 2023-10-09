@@ -31,7 +31,34 @@ n == image[i].length
  * @param {number} color
  * @return {number[][]}
  */
-var floodFill = function (image, sr, sc, color) {};
+var floodFill = function (image, sr, sc, color) {
+  let rows = image.length;
+  let cols = image[0].length;
+  if (sr >= rows || sc >= cols || image[sr][sc] === color) return image;
+  let directions = [
+    [-1, 0],
+    [0, 1],
+    [1, 0],
+    [0, -1],
+  ];
+  let oldColor = image[sr][sc];
+  image[sr][sc] = color;
+  let queue = [[sr, sc]];
+  while (queue.length > 0) {
+    let [currRow, currCol] = queue.shift();
+    for (let [offsetRow, offsetCol] of directions) {
+      let rowNeigh = currRow + offsetRow;
+      let colNeigh = currCol + offsetCol;
+      let validIndex =
+        rowNeigh >= 0 && rowNeigh < rows && colNeigh >= 0 && colNeigh < cols;
+      if (validIndex && image[rowNeigh][colNeigh] === oldColor) {
+        image[rowNeigh][colNeigh] = color;
+        queue.push([rowNeigh, colNeigh]);
+      }
+    }
+  }
+  return image;
+};
 
 let image = [
   [1, 1, 1],
