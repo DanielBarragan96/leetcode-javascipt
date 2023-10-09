@@ -18,8 +18,8 @@ Output: [[0,0,0],[0,1,0],[1,2,1]]
 var updateMatrix = function (mat) {
   if (!mat || mat.length === 0 || mat[0].length === 0) return [];
 
-  let cols = mat.length;
-  let rows = mat[0].length;
+  let rows = mat.length;
+  let cols = mat[0].length;
   let MAX_VAL = rows * cols;
   let queue = [];
 
@@ -39,7 +39,6 @@ var updateMatrix = function (mat) {
     [0, 1],
     [0, -1],
   ];
-
   while (queue.length > 0) {
     // Check next cell
     let [row, col] = queue.shift();
@@ -61,12 +60,4 @@ var updateMatrix = function (mat) {
   return mat;
 };
 
-console.log(
-  updateMatrix([
-    [
-      [0, 0, 0],
-      [0, 1, 0],
-      [1, 1, 1],
-    ],
-  ])
-);
+console.log(updateMatrix([[0], [0], [0], [0], [0]]));
