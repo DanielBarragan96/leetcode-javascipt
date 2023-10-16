@@ -27,4 +27,25 @@ Constraints:
  * @param {number} k
  * @return {number[][]}
  */
-var kClosest = function (points, k) {};
+var kClosest = function (points, k) {
+  let res = [];
+  for (let point of points) {
+    let x = point[0];
+    let y = point[1];
+    let dist = Math.sqrt(x ** 2 + y ** 2);
+    res.push([dist, point]);
+  }
+  res.sort((a, b) => a[0] - b[0]);
+
+  return res.map((e) => (e = e[1])).slice(0, k);
+};
+
+console.log(
+  kClosest(
+    [
+      [1, 3],
+      [-2, 2],
+    ],
+    2
+  )
+);
