@@ -35,4 +35,17 @@ word1 and word2 consist of lowercase English letters.
  * @param {string} word2
  * @return {string}
  */
-var mergeAlternately = function (word1, word2) {};
+var mergeAlternately = function (word1, word2) {
+  let index = 0;
+  let res = "";
+  while (index < word1.length || index < word2.length) {
+    if (index < word1.length) res += word1.charAt(index);
+    if (index < word2.length) res += word2.charAt(index);
+    index++;
+  }
+  return res;
+};
+
+word1 = "abc";
+word2 = "pqr";
+console.log(mergeAlternately(word1, word2));
