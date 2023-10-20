@@ -26,32 +26,31 @@ s and t only contain lowercase letters and '#' characters.
  * @param {string} t
  * @return {boolean}
  */
-
-var removeOneChar = function (word, index) {
-  let temp = "";
-  if (index - 1 >= 0) {
-    temp = word.slice(0, index - 1);
-  }
-  if (index + 1 < word.length) {
-    temp += word.slice(index + 1);
-  }
-  word = temp;
-  return word;
-};
 var backspaceCompare = function (s, t) {
-  let currHash = s.indexOf("#");
-  while (currHash >= 0) {
-    s = removeOneChar(s, currHash);
-    currHash = s.indexOf("#");
+  var processString = function (word) {
+    stack = [];
+    for (let char of word) {
+      if (char === "#") {
+        stack.pop();
+      } else {
+        stack.push(char);
+      }
+    }
+    return stack;
+  };
+  s = processString(s);
+  t = processString(t);
+  console.log(s);
+  console.log(t);
+  if (s.length !== t.length) return false;
+  for (let index = 0; index < s.length; index++) {
+    if (index >= t.length || s[index] !== t[index]) {
+      return false;
+    }
   }
-  currHash = t.indexOf("#");
-  while (currHash >= 0) {
-    t = removeOneChar(t, currHash);
-    currHash = t.indexOf("#");
-  }
-  return s === t;
+  return true;
 };
 
-s = "a##c";
-t = "#a#c";
+s = "aaa###a";
+t = "aaaa###a";
 console.log(backspaceCompare(s, t));
