@@ -30,7 +30,30 @@ grid[i][j] is 0, 1, or 2.
  * @param {number[][]} grid
  * @return {number}
  */
-var orangesRotting = function (grid) {};
+var orangesRotting = function (grid) {
+  let stack = [];
+  let res = 0;
+  let allRotten = true;
+
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[0].length; j++) {
+      if (grid[i][j] == 1) {
+        allRotten = false;
+      }
+      if (grid[i][j] == 2) {
+        stack.push([i, j]);
+      }
+    }
+  }
+  if (stack.length == 0) {
+    return -1;
+  }
+  if (allRotten) {
+    return 0;
+  }
+  console.log(stack);
+  return res;
+};
 
 console.log(
   orangesRotting([
