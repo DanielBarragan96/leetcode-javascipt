@@ -45,11 +45,11 @@ var orangesRotting = function (grid) {
       }
     }
   }
-  if (stack.length == 0) {
-    return -1;
-  }
   if (allRotten) {
     return 0;
+  }
+  if (stack.length == 0) {
+    return -1;
   }
   console.log(stack);
   return res;
