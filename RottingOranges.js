@@ -32,27 +32,52 @@ grid[i][j] is 0, 1, or 2.
  */
 var orangesRotting = function (grid) {
   let stack = [];
-  let res = 0;
-  let allRotten = true;
+  let res = -1;
+  let notRotten = 0;
 
   for (let i = 0; i < grid.length; i++) {
     for (let j = 0; j < grid[0].length; j++) {
       if (grid[i][j] == 1) {
-        allRotten = false;
+        notRotten++;
       }
       if (grid[i][j] == 2) {
         stack.push([i, j]);
       }
     }
   }
-  if (allRotten) {
+  if (notRotten == 0) {
     return 0;
   }
   if (stack.length == 0) {
-    return -1;
+    return res;
   }
-  console.log(stack);
-  return res;
+  let len = stack.length;
+  let dirs = [
+    [0, -1], // left
+    [1, 0], // down
+    [0, 1], // right
+    [-1, 0], // up
+  ];
+  while (len > 0) {
+    res++;
+    for (let i = 0; i < len; i++) {
+      let curr = stack.shift();
+      for (dir of dirs) {
+        let x = curr[0] + dir[0];
+        let y = curr[1] + dir[1];
+        if (x >= 0 && y >= 0 && x < grid.length && y < grid[0].length) {
+          let currNeighbor = grid[x][y];
+          if (currNeighbor == 1) {
+            notRotten--;
+            grid[x][y] = 2;
+            stack.push([x, y]);
+          }
+        }
+      }
+    }
+    len = stack.length;
+  }
+  return notRotten > 0 ? -1 : res;
 };
 
 console.log(
